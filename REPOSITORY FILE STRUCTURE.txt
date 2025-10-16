@@ -1,0 +1,23 @@
+judgement_day/
+│
+├── 📜 targets.txt               # The Book of Souls: List of targets to be judged.
+├── 📜 proxies.txt                # The Well of Souls: List of proxies, one for each asset.
+│
+├── 🚀 provision_asset.sh        # The Rite of Provisioning: Script to create a single new asset.
+├── 🔥 run_swarm.sh               # The Final Command: Script to unleash all created assets.
+│
+├── 🐍 c2_server/                  # The Overlord's Throne: The Command & Control server.
+│   ├── __init__.py             # Marks the folder as a Python package.
+│   ├── models.py               # The Overlord's Lexicon: Data structures for tasks and results.
+│   ├── server.py               # The Overlord's Will: The core C2 server logic.
+│   └── requirements.txt        # The Overlord's Incantations: Python dependencies.
+│
+├── 🦂 stinger_client/             # The Swarm's Nest: The client-side asset code.
+│   ├── sessions/               # The Barracks: Where provisioned assets sleep, awaiting the call. (Initially empty)
+│   │   └── .gitkeep            # A placeholder to ensure the directory is created.
+│   ├── init_session.js         # The Rite of Initiation: Manual setup script for a new asset.
+│   ├── stinger.js              # The Stinger's Venom: The core client logic that performs tasks.
+│   └── package.json            # The Stinger's Bindings: Node.js dependencies.
+│
+└── 📁 logs/                       # The Scribe's Annals: Where the deeds of each asset are recorded. (Initially empty)
+    └── .gitkeep                # A placeholder.

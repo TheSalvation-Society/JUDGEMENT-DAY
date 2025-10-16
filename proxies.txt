@@ -1,0 +1,8 @@
+# List of proxies, one per line.
+# Format: user:pass@host:port
+# These should be high-quality residential or mobile proxies.
+
+http://username1:password@proxy.example.com:8080
+http://username2:password@proxy.example.com:8081
+http://username3:password@proxy.example.com:8082
+http://username4:password@proxy.example.com:8083

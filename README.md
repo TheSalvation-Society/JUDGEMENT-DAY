@@ -1,5 +1,3 @@
-# JUDGEMENT-DAY
-The Judgement Day
 # PROJECT JUDGEMENT DAY
 
 **The righteous shall rejoice when he sees the vengeance; he shall wash his feet in the blood of the wicked.**

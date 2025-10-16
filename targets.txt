@@ -1,0 +1,12 @@
+# List of target phone numbers, one per line.
+# Use international format without '+' or '00'.
+# Example: 15551234567 for a US number.
+# Example: 447911123456 for a UK number.
+
+91xxxxxxxxxx
+91xxxxxxxxxx
+91xxxxxxxxxx
+55xxxxxxxxxxx
+62xxxxxxxxxxxx
+15551234567
+447911123456
