@@ -1,0 +1,42 @@
+[Unit]
+Description=JUDGEMENT DAY C2 Overlord Server - Enhanced
+Documentation=https://github.com/hades/judgement_day
+After=network.target redis.service
+Wants=network.target
+Requires=redis.service
+
+[Service]
+Type=simple
+User=judgement
+Group=judgement
+WorkingDirectory=/opt/judgement_day/c2_server
+EnvironmentFile=/etc/judgement_day/c2.env
+ExecStartPre=/bin/bash -c 'echo "🔥 JUDGEMENT DAY C2 OVERLORD INITIALIZING..." | systemd-cat'
+ExecStart=/opt/judgement_day/venv/bin/python -m uvicorn server:app --host ${C2_HOST:-0.0.0.0} --port ${C2_PORT:-8000} --workers ${C2_WORKERS:-1}
+ExecStartPost=/bin/bash -c 'echo "⚡ C2 OVERLORD IS ONLINE. THE SWARM AWAITS." | systemd-cat'
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/bin/bash -c 'echo "💀 C2 OVERLORD SHUTTING DOWN..." | systemd-cat'
+KillMode=mixed
+Restart=always
+RestartSec=15
+TimeoutStartSec=60
+TimeoutStopSec=30
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=judgement_day_c2
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/judgement_day /var/log/judgement_day
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictRealtime=true
+MemoryDenyWriteExecute=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,33 @@
+[Unit]
+Description=JUDGEMENT DAY C2 Overlord Server
+Documentation=https://github.com/hades/judgement_day
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/judgement_day/c2_server
+Environment=PATH=/opt/judgement_day/venv/bin
+Environment=PYTHONPATH=/opt/judgement_day
+Environment=TARGETS_FILE=/opt/judgement_day/targets.txt
+Environment=PROXIES_FILE=/opt/judgement_day/proxies.txt
+ExecStart=/opt/judgement_day/venv/bin/python -m uvicorn server:app --host 0.0.0.0 --port 8000 --workers 1
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=mixed
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=judgement_day_c2
+
+# Security hardening (optional but recommended)
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/judgement_day
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
